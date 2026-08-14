@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">MiniMax Music 3.0 Studio</title>
+  <desc id="desc">A geometric waveform mark inside a dark rounded square.</desc>
+  <rect width="64" height="64" rx="16" fill="#11161c"/>
+  <path d="M14 38c4.2 0 4.2-12 8.4-12s4.2 20 8.4 20 4.2-28 8.4-28 4.2 20 8.4 20 4.2-8 8.4-8" fill="none" stroke="#64d2ff" stroke-linecap="round" stroke-width="4"/>
+  <circle cx="14" cy="38" r="3" fill="#30d158"/>
+  <circle cx="56" cy="30" r="3" fill="#ffcc00"/>
+</svg>

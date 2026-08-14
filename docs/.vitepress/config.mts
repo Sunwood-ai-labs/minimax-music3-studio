@@ -1,25 +1,34 @@
 import { defineConfig } from 'vitepress'
 
-export default defineConfig({
-  title: 'ACE-Step Forge',
-  description: 'Local-first music workspace powered by ACE-Step 1.5',
+const base = '/minimax-music3-studio/'
+const repository = 'https://github.com/Sunwood-ai-labs/minimax-music3-studio'
+const markPath = '/minimax-music3-studio-mark.svg'
+const markUrl = `${base}minimax-music3-studio-mark.svg`
+const screenshot = `${base}images/minimax-music3-studio-ui.png`
 
-  base: '/ace-step-forge/',
+export default defineConfig({
+  lang: 'en',
+  title: 'MiniMax Music 3.0 Studio',
+  description: 'Local-first music generation workspace for MiniMax Music 3.0 on ComfyUI.',
+
+  base,
   lastUpdated: true,
   ignoreDeadLinks: [
     /localhost/,
     /\.\.\/\.\.\/README/,
-    // Missing translations
+    // Missing translations in inherited ACE-Step reference pages.
     /\.\/BENCHMARK/,
-    // Links from awesome-ace-step README (external repo)
+    // Links from the build-time awesome-ace-step reference page.
     /\.\/CONTRIBUTING/,
   ],
 
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: '/ace-step-forge/logo.png' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: markUrl }],
     ['meta', { name: 'og:type', content: 'website' }],
-    ['meta', { name: 'og:title', content: 'ACE-Step Forge Documentation' }],
-    ['meta', { name: 'og:description', content: 'Local-first music workspace powered by ACE-Step 1.5' }],
+    ['meta', { name: 'og:title', content: 'MiniMax Music 3.0 Studio' }],
+    ['meta', { name: 'og:description', content: 'Local-first MiniMax Music 3.0 generation workspace for ComfyUI.' }],
+    ['meta', { property: 'og:image', content: screenshot }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
   ],
 
   locales: {
@@ -32,19 +41,6 @@ export default defineConfig({
         sidebar: sidebarEN(),
       },
     },
-    zh: {
-      label: '中文',
-      lang: 'zh-CN',
-      link: '/zh/',
-      themeConfig: {
-        nav: navZH(),
-        sidebar: sidebarZH(),
-        outline: { label: '页面导航' },
-        lastUpdated: { text: '最后更新于' },
-        docFooter: { prev: '上一页', next: '下一页' },
-        editLink: { pattern: 'https://github.com/Sunwood-ai-labs/ace-step-forge/edit/main/docs/:path', text: '在 GitHub 上编辑此页面' },
-      },
-    },
     ja: {
       label: '日本語',
       lang: 'ja',
@@ -55,7 +51,18 @@ export default defineConfig({
         outline: { label: 'ページナビ' },
         lastUpdated: { text: '最終更新' },
         docFooter: { prev: '前へ', next: '次へ' },
-        editLink: { pattern: 'https://github.com/Sunwood-ai-labs/ace-step-forge/edit/main/docs/:path', text: 'GitHub でこのページを編集' },
+      },
+    },
+    zh: {
+      label: '中文',
+      lang: 'zh-CN',
+      link: '/zh/',
+      themeConfig: {
+        nav: navZH(),
+        sidebar: sidebarZH(),
+        outline: { label: '页面导航' },
+        lastUpdated: { text: '最后更新于' },
+        docFooter: { prev: '上一页', next: '下一页' },
       },
     },
     ko: {
@@ -68,18 +75,17 @@ export default defineConfig({
         outline: { label: '페이지 탐색' },
         lastUpdated: { text: '마지막 업데이트' },
         docFooter: { prev: '이전', next: '다음' },
-        editLink: { pattern: 'https://github.com/Sunwood-ai-labs/ace-step-forge/edit/main/docs/:path', text: 'GitHub에서 이 페이지 편집' },
       },
     },
   },
 
   themeConfig: {
+    logo: markPath,
     nav: navEN(),
     sidebar: sidebarEN(),
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/Sunwood-ai-labs/ace-step-forge' },
-      { icon: 'discord', link: 'https://discord.gg/PeWDxrkdj7' },
+      { icon: 'github', link: repository },
     ],
 
     search: {
@@ -87,65 +93,34 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/Sunwood-ai-labs/ace-step-forge/edit/main/docs/:path',
+      pattern: `${repository}/edit/main/docs/:path`,
       text: 'Edit this page on GitHub',
     },
 
     footer: {
-      message: 'Released under the MIT License. ACE-Step Forge is an independent fork of ACE-Step 1.5.',
-      copyright: 'Original ACE-Step code © 2025-present ACE-Step Team; Forge additions © Sunwood AI Labs.',
+      message: 'MiniMax Music 3.0 Studio is an unofficial community project.',
+      copyright: 'Released under the MIT License where applicable.',
     },
   },
 })
 
-// ---------------------------------------------------------------------------
-// English
-// ---------------------------------------------------------------------------
-
 function navEN() {
   return [
     {
-      text: 'Forge',
+      text: 'MiniMax Studio',
       items: [
-        { text: 'Workspace overview', link: '/en/FORGE' },
-        { text: 'v0.1.0 release notes', link: '/en/releases/v0.1.0' },
-        { text: 'v0.1.0 walkthrough', link: '/en/guide/articles/ace-step-forge-v0-1-0' },
-        { text: 'MCP setup', link: '/en/MCP' },
-        { text: '12 GB GPU operation', link: '/en/GPU_12GB' },
-        { text: 'React UI contract', link: '/en/REACT_FORGE' },
+        { text: 'Overview', link: '/en/' },
+        { text: 'Studio guide', link: '/en/MINIMAX_MUSIC3_STUDIO' },
       ],
     },
     {
-      text: 'ACE-Step 1.5',
+      text: 'ACE-Step reference',
       items: [
         { text: 'Installation', link: '/en/INSTALL' },
-        { text: 'Tutorial', link: '/en/Tutorial' },
-        { text: 'Gradio UI', link: '/en/GRADIO_GUIDE' },
-        { text: 'CLI', link: '/en/CLI' },
-      ],
-    },
-    {
-      text: 'API',
-      items: [
         { text: 'Local API', link: '/en/API' },
-        { text: 'OpenRouter API', link: '/en/Openrouter_API_DOC' },
+        { text: 'MCP setup', link: '/en/MCP' },
+        { text: 'GPU compatibility', link: '/en/GPU_COMPATIBILITY' },
       ],
-    },
-    {
-      text: 'Advanced',
-      items: [
-        { text: 'LoRA Training', link: '/en/LoRA_Training_Tutorial' },
-        { text: 'Benchmark', link: '/en/BENCHMARK' },
-        { text: 'GPU Compatibility', link: '/en/GPU_COMPATIBILITY' },
-      ],
-    },
-    {
-      text: 'SideStep',
-      link: '/sidestep/Getting Started',
-    },
-    {
-      text: 'Ecosystem',
-      link: '/en/awesome',
     },
   ]
 }
@@ -154,194 +129,44 @@ function sidebarEN() {
   return {
     '/en/': [
       {
-        text: 'Forge Workspace',
+        text: 'MiniMax Music 3.0 Studio',
         items: [
-          { text: 'Overview', link: '/en/FORGE' },
-          { text: 'v0.1.0 Release Notes', link: '/en/releases/v0.1.0' },
-          { text: 'v0.1.0 Walkthrough', link: '/en/guide/articles/ace-step-forge-v0-1-0' },
-          { text: 'MCP Setup', link: '/en/MCP' },
-          { text: '12 GB GPU Operation', link: '/en/GPU_12GB' },
-          { text: 'React UI Contract', link: '/en/REACT_FORGE' },
+          { text: 'Overview', link: '/en/' },
+          { text: 'Studio guide', link: '/en/MINIMAX_MUSIC3_STUDIO' },
         ],
       },
       {
-        text: 'Getting Started',
+        text: 'ACE-Step reference',
         items: [
           { text: 'Installation', link: '/en/INSTALL' },
-          { text: 'Tutorial (Must Read)', link: '/en/Tutorial' },
-        ],
-      },
-      {
-        text: 'User Guide',
-        items: [
-          { text: 'Gradio UI Guide', link: '/en/GRADIO_GUIDE' },
-          { text: 'UI Support Baseline', link: '/en/UI_SUPPORT' },
-          { text: 'CLI', link: '/en/CLI' },
-          { text: "Musician's Guide", link: '/en/ace_step_musicians_guide' },
-        ],
-      },
-      {
-        text: 'API Reference',
-        items: [
+          { text: 'Tutorial', link: '/en/Tutorial' },
           { text: 'Local API', link: '/en/API' },
-          { text: 'OpenRouter API', link: '/en/Openrouter_API_DOC' },
           { text: 'Inference', link: '/en/INFERENCE' },
-        ],
-      },
-      {
-        text: 'Advanced',
-        items: [
-          { text: 'LoRA Training', link: '/en/LoRA_Training_Tutorial' },
-          { text: 'GPU Compatibility', link: '/en/GPU_COMPATIBILITY' },
-          { text: 'GPU Troubleshooting', link: '/en/GPU_TROUBLESHOOTING' },
-          { text: 'Benchmark', link: '/en/BENCHMARK' },
-          { text: 'ROCm on Linux', link: '/en/ACE-Step1.5-Rocm-Manual-Linux' },
-        ],
-      },
-      {
-        text: 'Ecosystem',
-        items: [
-          { text: 'Awesome ACE-Step', link: '/en/awesome' },
-        ],
-      },
-    ],
-    '/sidestep/': [
-      {
-        text: 'SideStep',
-        link: 'https://github.com/koda-dernet/Side-Step',
-        items: [
-          { text: 'Getting Started', link: '/sidestep/Getting Started' },
-          { text: 'Dataset Preparation', link: '/sidestep/Dataset Preparation' },
-          { text: 'Training Guide', link: '/sidestep/Training Guide' },
-          { text: 'End-to-End Tutorial', link: '/sidestep/End-to-End Tutorial' },
-          { text: 'Model Management', link: '/sidestep/Model Management' },
-          { text: 'Preset Management', link: '/sidestep/Preset Management' },
-          { text: 'Using Your Adapter', link: '/sidestep/Using Your Adapter' },
-          { text: 'Estimation Guide', link: '/sidestep/Estimation Guide' },
-          { text: 'Shift & Timestep Sampling', link: '/sidestep/Shift and Timestep Sampling' },
-          { text: 'The Settings Wizard', link: '/sidestep/The Settings Wizard' },
-          { text: 'VRAM Optimization', link: '/sidestep/VRAM Optimization Guide' },
-          { text: 'Windows Notes', link: '/sidestep/Windows Notes' },
+          { text: 'GPU compatibility', link: '/en/GPU_COMPATIBILITY' },
+          { text: 'MCP setup', link: '/en/MCP' },
         ],
       },
     ],
   }
 }
-
-// ---------------------------------------------------------------------------
-// Chinese
-// ---------------------------------------------------------------------------
-
-function navZH() {
-  return [
-    {
-      text: '指南',
-      items: [
-        { text: '安装', link: '/zh/INSTALL' },
-        { text: '教程', link: '/zh/Tutorial' },
-        { text: 'Gradio UI', link: '/zh/GRADIO_GUIDE' },
-      ],
-    },
-    {
-      text: 'API',
-      items: [
-        { text: '本地 API', link: '/zh/API' },
-        { text: 'OpenRouter API', link: '/zh/Openrouter_API_DOC' },
-      ],
-    },
-    {
-      text: '进阶',
-      items: [
-        { text: 'LoRA 训练', link: '/zh/LoRA_Training_Tutorial' },
-        { text: '评测', link: '/zh/BENCHMARK' },
-        { text: 'GPU 兼容性', link: '/zh/GPU_COMPATIBILITY' },
-      ],
-    },
-    {
-      text: '生态',
-      link: '/en/awesome',
-    },
-  ]
-}
-
-function sidebarZH() {
-  return {
-    '/zh/': [
-      {
-        text: '快速开始',
-        items: [
-          { text: '安装指南', link: '/zh/INSTALL' },
-          { text: '教程 (必读)', link: '/zh/Tutorial' },
-        ],
-      },
-      {
-        text: '使用指南',
-        items: [
-          { text: 'Gradio UI 指南', link: '/zh/GRADIO_GUIDE' },
-        ],
-      },
-      {
-        text: 'API 参考',
-        items: [
-          { text: '本地 API', link: '/zh/API' },
-          { text: 'OpenRouter API', link: '/zh/Openrouter_API_DOC' },
-          { text: '推理', link: '/zh/INFERENCE' },
-        ],
-      },
-      {
-        text: '进阶',
-        items: [
-          { text: 'LoRA 训练', link: '/zh/LoRA_Training_Tutorial' },
-          { text: 'GPU 兼容性', link: '/zh/GPU_COMPATIBILITY' },
-          { text: '评测', link: '/zh/BENCHMARK' },
-        ],
-      },
-    ],
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Japanese
-// ---------------------------------------------------------------------------
 
 function navJA() {
   return [
     {
-      text: 'Forge',
+      text: 'MiniMax Studio',
       items: [
-        { text: 'ワークスペース概要', link: '/ja/FORGE' },
-        { text: 'v0.1.0 リリースノート', link: '/ja/releases/v0.1.0' },
-        { text: 'v0.1.0 walkthrough', link: '/ja/guide/articles/ace-step-forge-v0-1-0' },
-        { text: 'MCP セットアップ', link: '/ja/MCP' },
-        { text: '12 GB GPU 運用', link: '/ja/GPU_12GB' },
-        { text: 'React UI 契約', link: '/en/REACT_FORGE' },
+        { text: '概要', link: '/ja/' },
+        { text: 'Studio ガイド', link: '/ja/MINIMAX_MUSIC3_STUDIO' },
       ],
     },
     {
-      text: 'ACE-Step 1.5',
+      text: 'ACE-Step リファレンス',
       items: [
         { text: 'インストール', link: '/ja/INSTALL' },
-        { text: 'チュートリアル', link: '/ja/Tutorial' },
-        { text: 'Gradio UI', link: '/ja/GRADIO_GUIDE' },
-      ],
-    },
-    {
-      text: 'API',
-      items: [
         { text: 'ローカル API', link: '/ja/API' },
-        { text: 'OpenRouter API', link: '/ja/Openrouter_API_DOC' },
-      ],
-    },
-    {
-      text: '上級',
-      items: [
-        { text: 'LoRA 学習', link: '/ja/LoRA_Training_Tutorial' },
+        { text: 'MCP セットアップ', link: '/ja/MCP' },
         { text: 'GPU 互換性', link: '/ja/GPU_COMPATIBILITY' },
       ],
-    },
-    {
-      text: 'エコシステム',
-      link: '/en/awesome',
     },
   ]
 }
@@ -350,79 +175,55 @@ function sidebarJA() {
   return {
     '/ja/': [
       {
-        text: 'Forge ワークスペース',
+        text: 'MiniMax Music 3.0 Studio',
         items: [
-          { text: '概要', link: '/ja/FORGE' },
-          { text: 'v0.1.0 リリースノート', link: '/ja/releases/v0.1.0' },
-          { text: 'v0.1.0 walkthrough', link: '/ja/guide/articles/ace-step-forge-v0-1-0' },
-          { text: 'MCP セットアップ', link: '/ja/MCP' },
-          { text: '12 GB GPU 運用', link: '/ja/GPU_12GB' },
-          { text: 'React UI 契約', link: '/en/REACT_FORGE' },
+          { text: '概要', link: '/ja/' },
+          { text: 'Studio ガイド', link: '/ja/MINIMAX_MUSIC3_STUDIO' },
         ],
       },
       {
-        text: 'はじめに',
+        text: 'ACE-Step リファレンス',
         items: [
           { text: 'インストール', link: '/ja/INSTALL' },
-          { text: 'チュートリアル (必読)', link: '/ja/Tutorial' },
-        ],
-      },
-      {
-        text: '使い方',
-        items: [
-          { text: 'Gradio UI ガイド', link: '/ja/GRADIO_GUIDE' },
-        ],
-      },
-      {
-        text: 'APIリファレンス',
-        items: [
+          { text: 'チュートリアル', link: '/ja/Tutorial' },
           { text: 'ローカル API', link: '/ja/API' },
-          { text: 'OpenRouter API', link: '/ja/Openrouter_API_DOC' },
           { text: '推論', link: '/ja/INFERENCE' },
-        ],
-      },
-      {
-        text: '上級',
-        items: [
-          { text: 'LoRA 学習', link: '/ja/LoRA_Training_Tutorial' },
           { text: 'GPU 互換性', link: '/ja/GPU_COMPATIBILITY' },
+          { text: 'MCP セットアップ', link: '/ja/MCP' },
         ],
       },
     ],
   }
 }
 
-// ---------------------------------------------------------------------------
-// Korean
-// ---------------------------------------------------------------------------
+function navZH() {
+  return [
+    { text: 'MiniMax Studio', link: '/en/' },
+    { text: 'ACE-Step 参考', link: '/zh/INSTALL' },
+  ]
+}
+
+function sidebarZH() {
+  return {
+    '/zh/': [
+      {
+        text: 'ACE-Step 参考',
+        items: [
+          { text: '安装', link: '/zh/INSTALL' },
+          { text: '教程', link: '/zh/Tutorial' },
+          { text: '本地 API', link: '/zh/API' },
+          { text: '推理', link: '/zh/INFERENCE' },
+          { text: 'GPU 兼容性', link: '/zh/GPU_COMPATIBILITY' },
+        ],
+      },
+    ],
+  }
+}
 
 function navKO() {
   return [
-    {
-      text: '가이드',
-      items: [
-        { text: '튜토리얼', link: '/ko/Tutorial' },
-        { text: 'Gradio UI', link: '/ko/GRADIO_GUIDE' },
-      ],
-    },
-    {
-      text: 'API',
-      items: [
-        { text: '로컬 API', link: '/ko/API' },
-        { text: 'OpenRouter API', link: '/ko/Openrouter_API_DOC' },
-      ],
-    },
-    {
-      text: '고급',
-      items: [
-        { text: 'LoRA 학습', link: '/ko/LoRA_Training_Tutorial' },
-        { text: 'GPU 호환성', link: '/ko/GPU_COMPATIBILITY' },
-      ],
-    },
-    {
-      text: '에코시스템',
-      link: '/en/awesome',
-    },
+    { text: 'MiniMax Studio', link: '/en/' },
+    { text: 'ACE-Step 참고', link: '/ko/INSTALL' },
   ]
 }
 
@@ -430,29 +231,12 @@ function sidebarKO() {
   return {
     '/ko/': [
       {
-        text: '시작하기',
+        text: 'ACE-Step 참고',
         items: [
-          { text: '튜토리얼 (필독)', link: '/ko/Tutorial' },
-        ],
-      },
-      {
-        text: '사용 가이드',
-        items: [
-          { text: 'Gradio UI 가이드', link: '/ko/GRADIO_GUIDE' },
-        ],
-      },
-      {
-        text: 'API 레퍼런스',
-        items: [
+          { text: '설치', link: '/ko/INSTALL' },
+          { text: '튜토리얼', link: '/ko/Tutorial' },
           { text: '로컬 API', link: '/ko/API' },
-          { text: 'OpenRouter API', link: '/ko/Openrouter_API_DOC' },
           { text: '추론', link: '/ko/INFERENCE' },
-        ],
-      },
-      {
-        text: '고급',
-        items: [
-          { text: 'LoRA 학습', link: '/ko/LoRA_Training_Tutorial' },
           { text: 'GPU 호환성', link: '/ko/GPU_COMPATIBILITY' },
         ],
       },

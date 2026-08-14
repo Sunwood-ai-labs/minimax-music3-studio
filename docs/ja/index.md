@@ -1,43 +1,42 @@
 ---
 layout: home
 hero:
-  name: ACE-Step Forge
-  text: 生成したテイクを、きちんと残して使う。
-  tagline: ACE-Step 1.5 のローカル音楽生成、共有 Library、そしてコーディングエージェント用 MCP をひとつにまとめたワークスペースです。
+  name: MiniMax Music 3.0 Studio
+  text: GPUのそばで、生成の流れをつなぐ。
+  tagline: 構造化した制作メモ、日本語ボーカル、セクション付き歌詞、MP3 LibraryをまとめたComfyUI向けローカルワークスペースです。
   actions:
     - theme: brand
-      text: Forge 概要
-      link: /ja/FORGE
+      text: Studio ガイド
+      link: /ja/MINIMAX_MUSIC3_STUDIO
     - theme: alt
-      text: MCP セットアップ
-      link: /ja/MCP
+      text: GitHub README
+      link: https://github.com/Sunwood-ai-labs/minimax-music3-studio
     - theme: alt
-      text: 12 GB GPU 運用
-      link: /ja/GPU_12GB
+      text: English
+      link: /en/MINIMAX_MUSIC3_STUDIO
 features:
   - icon: "✦"
-    title: Create → Library
-    details: 完成した曲を Forge サービス側に保存し、同じサービスを使うブラウザから再生できます。
+    title: Brief → queue → Library
+    details: 制作メモとセクション付き歌詞をComfyUIの実ジョブへ送り、MP3をローカルで試聴できます。
   - icon: "⌘"
-    title: localhost の MCP
-    details: Claude Code や Codex から、同じ生成キューを Streamable HTTP で使えます。
+    title: MiniMaxに集中
+    details: チェックイン済みworkflow、INT8モデル構成、音声出力の契約をUIから追いやすくしています。
   - icon: "◌"
-    title: 安定した GPU 選択
-    details: コンテナ内の番号ではなく GPU UUID を Compose に渡し、使うカードを明示します。
+    title: GPUを意識した構成
+    details: ComfyUIをローカルworkerとして使うため、モデルと生成物はGPUを持つワークステーションに残ります。
 ---
 
-## 完成した曲を再生するところまで
+## Studioの画面を見る
 
-![生成済みの曲を再生する ACE-Step Forge Library](/images/forge-library-playback.png)
+![日本語ボーカルの制作メモを入力した MiniMax Music 3.0 Studio のCompose画面](/images/minimax-music3-studio-ui.png)
 
-これは実際にローカルで動作した Forge の画面です。和風ロックの生成が **Ready** になり、共有
-Library に現れ、ブラウザのオーディオプレーヤーで再生されています。
+実際に動作しているローカルStudio UIの画面です。日本語シェルでComposeを
+開き、ComfyUI上のMiniMax Music 3.0がReadyになった状態を表示しています。
 
-[Forge 概要](./FORGE)から始め、必要に応じて [MCP セットアップ](./MCP) や
-[12 GB GPU 運用](./GPU_12GB) を参照してください。
+[MiniMax Studio ガイド](./MINIMAX_MUSIC3_STUDIO)から始め、詳しい起動手順は
+リポジトリの [README](https://github.com/Sunwood-ai-labs/minimax-music3-studio)を参照してください。
 
-## v0.1.0
+## 後段のワークフローへ
 
-[リリースノート](./releases/v0.1.0) と
-[v0.1.0 walkthrough](./guide/articles/ace-step-forge-v0-1-0) で、生成から
-Library、ビジュアライザまでの検証済みフローを確認できます。
+LibraryのMP3は、後段のSRT生成やHyperFramesのリリックモーションに渡せます。
+生成UIの役割を絞るため、動画化は別ワークフローとして扱います。

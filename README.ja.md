@@ -3,6 +3,10 @@
 ComfyUI 上の MiniMax Music 3.0 で、ローカル生成を行うための音楽制作
 ワークスペースです。
 
+[English](./README.md) · [Documentation](https://sunwood-ai-labs.github.io/minimax-music3-studio/)
+
+[![Frontend CI](https://github.com/Sunwood-ai-labs/minimax-music3-studio/actions/workflows/frontend.yml/badge.svg)](https://github.com/Sunwood-ai-labs/minimax-music3-studio/actions/workflows/frontend.yml) [![License](https://img.shields.io/github/license/Sunwood-ai-labs/minimax-music3-studio)](./LICENSE) [![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+
 構造化した制作メモとセクション付き歌詞を実際の ComfyUI キューへ送り、
 GPU レンダリングの進行を表示します。完成した MP3 はローカル Library
 から再生・ダウンロードできます。
@@ -10,9 +14,9 @@ GPU レンダリングの進行を表示します。完成した MP3 はロー�
 > 非公式のコミュニティプロジェクトです。MiniMax、ComfyUI、ACE-Step
 > チームとは提携・承認関係にありません。
 
-[English](./README.md) · [MiniMax workflow](./workflows/minimax_music3_api.json) · [Issues](https://github.com/Sunwood-ai-labs/minimax-music3-studio/issues) · [MIT License](./LICENSE)
+[MiniMax workflow](./workflows/minimax_music3_api.json) · [Issues](https://github.com/Sunwood-ai-labs/minimax-music3-studio/issues) · [MIT License](./LICENSE)
 
-## このUIでできること
+## 🎛️ このUIでできること
 
 生成画面が主役です。ジャンル名を1つ入力するだけではなく、次の3つの
 欄を分けて入力します。
@@ -39,7 +43,14 @@ UI が3つの欄を MiniMax Music 3.0 用の caption にまとめ、
 ワークフローとして扱います。このリポジトリでは、まず生成を確実に使える
 ことを優先しています。
 
-## 必要なもの
+## 🖼️ UIプレビュー
+
+![日本語ボーカルの制作メモを入力した MiniMax Music 3.0 Studio のCompose画面](./docs/public/images/minimax-music3-studio-ui.png)
+
+1440×900のローカルCompose画面です。日本語シェルを選択し、MiniMax Music 3.0
+のランタイムがReadyになった状態で、日本語ボーカル用の制作メモを入力しています。
+
+## 🧰 必要なもの
 
 - Windows、Python 3.11 以上、Node.js 20 以上
 - MiniMax Music 3.0 ノードが使える ComfyUI
@@ -51,7 +62,7 @@ UI が3つの欄を MiniMax Music 3.0 用の caption にまとめ、
 
 モデルウェイトは公開リポジトリに含めません。
 
-## 起動手順
+## 🚀 起動手順
 
 ### 1. ComfyUI を起動
 
@@ -95,7 +106,7 @@ docker compose -f docker-compose.music3.yml up -d --build
 ブラウザで <http://127.0.0.1:5173> を開きます。Compose版gatewayは
 `host.docker.internal:8201` 経由でホスト上のComfyUIへ接続します。
 
-## 生成の流れ
+## 🔄 生成の流れ
 
 ```text
 Compose
@@ -115,7 +126,7 @@ DAV VAE、KSampler、`SaveAudioMP3` で構成しています。Tiled decode をO
 すると `VAEDecodeAudioTiled`（tile 512 / overlap 64）、OFFにすると通常の
 `VAEDecodeAudio`を使います。
 
-## 変更を確認する
+## ✅ 変更を確認する
 
 ```powershell
 docker compose -f docker-compose.music3.yml config --quiet
@@ -132,7 +143,7 @@ Generate → **Ready to audition** を待つ → キューまたはLibraryでMP3
 です。8秒・日本語ボーカル・8 steps・Tiled decodeのリクエストを実際に生成し、
 ブラウザで約8秒のMP3を再生するところまで確認済みです。
 
-## 公開リポジトリの境界
+## 🧱 公開リポジトリの境界
 
 - モデルウェイト、秘密の `.env`、音声、SRT、動画はコミットしません。
   実行時のLibraryメタデータは無視対象の `data/` に保存します。
@@ -143,7 +154,7 @@ Generate → **Ready to audition** を待つ → キューまたはLibraryでMP3
 - リポジトリ名は `minimax-music3-studio`、表示名は
   **MiniMax Music 3.0 Studio** です。
 
-## 参考リンク
+## 🔗 参考リンク
 
 - [MiniMax AI（GitHub）](https://github.com/MiniMax-AI)
 - [ComfyUI用 MiniMax Music 3.0 モデル](https://huggingface.co/Comfy-Org/MiniMax-Music-3)

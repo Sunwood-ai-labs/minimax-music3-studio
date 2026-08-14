@@ -2,6 +2,10 @@
 
 Local-first music generation workspace for MiniMax Music 3.0 on ComfyUI.
 
+[日本語](./README.ja.md) · [Documentation](https://sunwood-ai-labs.github.io/minimax-music3-studio/)
+
+[![Frontend CI](https://github.com/Sunwood-ai-labs/minimax-music3-studio/actions/workflows/frontend.yml/badge.svg)](https://github.com/Sunwood-ai-labs/minimax-music3-studio/actions/workflows/frontend.yml) [![License](https://img.shields.io/github/license/Sunwood-ai-labs/minimax-music3-studio)](./LICENSE) [![Node.js 20+](https://img.shields.io/badge/Node.js-20%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+
 MiniMax Music 3.0 Studio turns a structured brief and section-tagged lyrics into
 a real ComfyUI queue job. It keeps the GPU render local, shows progress in a
 small Library, and lets you audition or download the resulting MP3 from the
@@ -10,9 +14,9 @@ browser.
 > This is an unofficial community project. It is not affiliated with or
 > endorsed by MiniMax, ComfyUI, or the ACE-Step team.
 
-[日本語](./README.ja.md) · [MiniMax workflow](./workflows/minimax_music3_api.json) · [Issues](https://github.com/Sunwood-ai-labs/minimax-music3-studio/issues) · [MIT License](./LICENSE)
+[MiniMax workflow](./workflows/minimax_music3_api.json) · [Issues](https://github.com/Sunwood-ai-labs/minimax-music3-studio/issues) · [MIT License](./LICENSE)
 
-## Why this exists
+## 🎛️ Why this exists
 
 The generation UI is the product surface. The important input is not a single
 genre prompt, but a small production brief:
@@ -27,7 +31,7 @@ The Studio assembles those three fields into the caption format used by the
 MiniMax Music 3.0 ComfyUI node, while passing lyrics with tags such as
 `[Intro]`, `[Verse]`, `[Chorus]`, `[Bridge]`, and `[Outro]` unchanged.
 
-## Included
+## ✨ Included
 
 - **Compose** — structured MiniMax Music 3.0 brief, Japanese vocal defaults,
   lyrics editor, quick starts, duration, steps, CFG, seed, variations, and
@@ -44,7 +48,15 @@ The post-generation lyric/SRT and HyperFrames motion workflow can consume the
 MP3 from the Library. This repository keeps generation as the primary flow;
 those video steps are intentionally separate tools.
 
-## Requirements
+## 🖼️ UI preview
+
+![MiniMax Music 3.0 Studio Compose screen with a Japanese vocal brief](./docs/public/images/minimax-music3-studio-ui.png)
+
+The screenshot shows the local Compose surface at 1440×900 with the Japanese
+shell selected, the MiniMax Music 3.0 runtime ready, and a structured Japanese
+vocal brief prepared for generation.
+
+## 🧰 Requirements
 
 - Windows with Python 3.11+ and Node.js 20+
 - ComfyUI with the MiniMax Music 3.0 nodes available
@@ -57,7 +69,7 @@ those video steps are intentionally separate tools.
 
 Model weights are intentionally not included in this repository.
 
-## Quick start
+## 🚀 Quick start
 
 ### 1. Start ComfyUI
 
@@ -106,7 +118,7 @@ docker compose -f docker-compose.music3.yml up -d --build
 Open <http://127.0.0.1:5173>. The Compose gateway reaches the host worker via
 `host.docker.internal:8201`.
 
-## How a generation moves
+## 🔄 How a generation moves
 
 ```text
 Compose form
@@ -126,7 +138,7 @@ VAE, KSampler, and `SaveAudioMP3`. Tiled decode switches node 12 to
 `VAEDecodeAudioTiled` with a 512/64 tile-overlap profile; turning it off uses
 the regular `VAEDecodeAudio` node.
 
-## Verify a change
+## ✅ Verify a change
 
 ```powershell
 docker compose -f docker-compose.music3.yml config --quiet
@@ -144,7 +156,7 @@ queue or Library. A local smoke render was verified with an 8-second Japanese
 vocal request, 8 steps, tiled decode, and a browser playback duration of about
 8 seconds.
 
-## Repository boundaries
+## 🧱 Repository boundaries
 
 - Do not commit model weights, private `.env` files, audio, SRT, or rendered
   video. Runtime metadata is written to the ignored `data/` directory.
@@ -155,7 +167,7 @@ vocal request, 8 steps, tiled decode, and a browser playback duration of about
 - The public project name is `minimax-music3-studio`; the display name is
   **MiniMax Music 3.0 Studio**.
 
-## References
+## 🔗 References
 
 - [MiniMax AI on GitHub](https://github.com/MiniMax-AI)
 - [MiniMax Music 3.0 model files for ComfyUI](https://huggingface.co/Comfy-Org/MiniMax-Music-3)

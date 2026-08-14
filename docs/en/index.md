@@ -1,40 +1,40 @@
 ---
 layout: home
 hero:
-  name: ACE-Step Forge
-  text: A local music workspace that keeps the take.
-  tagline: Generate with ACE-Step 1.5, retain completed audio in a shared Library, and connect coding agents through MCP.
+  name: MiniMax Music 3.0 Studio
+  text: Keep the generation loop close to the GPU.
+  tagline: A local-first ComfyUI workspace for structured briefs, Japanese vocals, tagged lyrics, and MP3 Library playback.
   actions:
     - theme: brand
-      text: Forge overview
-      link: /en/FORGE
+      text: Studio guide
+      link: /en/MINIMAX_MUSIC3_STUDIO
     - theme: alt
-      text: MCP setup
-      link: /en/MCP
+      text: GitHub README
+      link: https://github.com/Sunwood-ai-labs/minimax-music3-studio
     - theme: alt
-      text: 12 GB GPU guide
-      link: /en/GPU_12GB
+      text: 日本語
+      link: /ja/MINIMAX_MUSIC3_STUDIO
 features:
   - icon: "✦"
-    title: Create → Library
-    details: A completed job is retained by the Forge service and ready to play from any browser using that service.
+    title: Brief → queue → Library
+    details: Turn structured production notes and section-tagged lyrics into a real ComfyUI job, then audition the MP3 locally.
   - icon: "⌘"
-    title: MCP on localhost
-    details: Claude Code and Codex can call the same generation queue with a local Streamable HTTP connection.
+    title: MiniMax-focused
+    details: The checked-in workflow keeps the MiniMax Music 3.0 nodes, INT8 model path, and audio output contract visible.
   - icon: "◌"
-    title: Stable GPU selection
-    details: Configure Compose with a GPU UUID rather than trusting an unstable container index.
+    title: GPU intentional
+    details: ComfyUI remains the local worker, so model files and renders stay on the workstation that owns the GPU.
 ---
 
-## See the completed track
+## See the Studio surface
 
-![A locally generated ACE-Step Forge track playing in Library](/images/forge-library-playback.png)
+![MiniMax Music 3.0 Studio Compose screen with a Japanese vocal brief](/images/minimax-music3-studio-ui.png)
 
-Start with the [Forge workspace overview](./FORGE), then follow the
-[MCP setup](./MCP) or [12 GB GPU operation guide](./GPU_12GB).
+Start with the [MiniMax Studio guide](./MINIMAX_MUSIC3_STUDIO), then use the
+repository [README](https://github.com/Sunwood-ai-labs/minimax-music3-studio)
+for the full local setup.
 
-## v0.1.0
+## Downstream-ready
 
-Read the [release notes](./releases/v0.1.0) and the
-[v0.1.0 walkthrough](./guide/articles/ace-step-forge-v0-1-0) for the verified
-generation → Library → visualizer path.
+The Library MP3 can flow into later SRT and HyperFrames lyric-motion work. Those
+steps stay separate so the generation UI remains focused and local.
