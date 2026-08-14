@@ -2,7 +2,7 @@ export const supportedLocales = ["en", "ja"] as const;
 
 export type Locale = (typeof supportedLocales)[number];
 
-const localeStorageKey = "ace-step-forge.locale";
+const localeStorageKey = "minimax-music3-studio.locale";
 
 export function parseLocale(value: unknown): Locale {
   return value === "ja" ? "ja" : "en";

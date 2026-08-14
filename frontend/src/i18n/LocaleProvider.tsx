@@ -13,7 +13,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = locale;
-    document.title = locale === "ja" ? "ACE-Step Forge — 音楽生成" : "ACE-Step Forge";
+    document.title = locale === "ja" ? "MiniMax Music 3.0 Studio — 音楽生成" : "MiniMax Music 3.0 Studio";
     writeLocale(locale);
   }, [locale]);
 

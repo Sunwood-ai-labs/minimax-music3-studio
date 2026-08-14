@@ -261,6 +261,8 @@ docs/.vitepress/dist/
 docs/.vitepress/cache/
 web/
 output/
+data/
+frontend/dist/
 .qa-*.png
 docs/en/awesome.md
 package-lock.json

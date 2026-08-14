@@ -1,12 +1,12 @@
-import { Activity, Archive, PlugZap, Settings2, Sparkles } from "lucide-react";
+import { Activity, Archive, Settings2, Sparkles } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import type { ReactNode } from "react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useLocale } from "../i18n/LocaleProvider";
 import { getShellCopy } from "../i18n/shellCopy";
-import type { ServiceState } from "../lib/types";
+import type { ServiceState } from "../lib/music3Types";
 
-const REPOSITORY_URL = "https://github.com/Sunwood-ai-labs/ace-step-forge";
+const REPOSITORY_URL = "https://github.com/Sunwood-ai-labs/minimax-music3-studio";
 
 interface AppShellProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ interface AppShellProps {
 function ForgeFooterLink({ label }: { label: string }) {
   return (
     <a className="footer-brand-link" href={REPOSITORY_URL} target="_blank" rel="noreferrer">
-      <img className="footer-brand-icon" src="/ace-step-forge-icon.png" alt="" aria-hidden="true" />
+      <span className="footer-brand-mark" aria-hidden="true">3</span>
       <span>{label}</span>
     </a>
   );
@@ -32,7 +32,6 @@ export function AppShell({ children, serviceState, activeCount }: AppShellProps)
   const navigation = [
     { to: "/", ...copy.navigation.create, icon: Sparkles },
     { to: "/library", ...copy.navigation.library, icon: Archive },
-    { to: "/mcp", ...copy.navigation.mcp, icon: PlugZap },
     { to: "/system", ...copy.navigation.system, icon: Settings2 },
   ];
 
@@ -40,9 +39,9 @@ export function AppShell({ children, serviceState, activeCount }: AppShellProps)
     <div className="app-frame">
       <a className="skip-link" href="#main-content">{copy.skipLink}</a>
       <aside className="sidebar" aria-label={copy.navigationLabel}>
-        <div className="brand-lockup">
-          <strong>ACE / STEP</strong>
-          <span>FORGE 1.5</span>
+      <div className="brand-lockup">
+          <strong>MINIMAX / MUSIC</strong>
+          <span>3.0 STUDIO</span>
         </div>
 
         <nav className="side-nav">
