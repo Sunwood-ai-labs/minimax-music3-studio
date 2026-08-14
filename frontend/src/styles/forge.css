@@ -17,3 +17,9 @@
 
 @media (max-width: 1080px) { .forge-grid { grid-template-columns: 1fr; }.inspector-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.35rem; }.three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 640px) { .metric-strip { grid-template-columns: 1fr; }.metric-strip div { display: flex; align-items: center; justify-content: space-between; border-right: 0; border-bottom: 1px solid var(--line); }.metric-strip div:last-child { border-bottom: 0; }.metric-strip dd { margin: 0; }.composer-intro, .composer-actions { align-items: flex-start; flex-direction: column; }.mode-tabs { width: 100%; }.mode-tabs button { flex: 1; }.three-up, .four-up, .upload-grid, .inspector-column { grid-template-columns: 1fr; }.composer-actions .primary-button { width: 100%; }.assist-row { display: grid; }.advanced-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.mode-tabs button.is-selected { color: var(--on-accent); background: var(--accent); }
+.idea-row button { color: var(--info); background: rgb(var(--info-rgb) / 0.09); border-color: rgb(var(--info-rgb) / 0.25); }
+.file-field.required { border-color: rgb(var(--accent-rgb) / 0.55); }
+.seed-row svg, .composer-actions p svg { color: var(--accent); }
+.form-error { background: rgb(var(--danger-rgb) / 0.1); border-color: rgb(var(--danger-rgb) / 0.3); }

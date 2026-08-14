@@ -19,3 +19,32 @@
 @media (max-width: 1050px) { .music3-layout { grid-template-columns: 1fr; }.music3-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); }.music3-note { min-height: 100%; } }
 @media (max-width: 700px) { .music3-metric-strip { grid-template-columns: 1fr; }.music3-metric-strip > div { border-right: 0; border-bottom: 1px solid var(--line); }.music3-metric-strip > div:last-child { border-bottom: 0; }.music3-brief-grid, .music3-settings-grid, .music3-settings-grid.advanced, .music3-setup-grid, .music3-aside { grid-template-columns: 1fr; }.music3-brief-field.wide { grid-column: auto; }.music3-composer-head, .music3-submit-row, .music3-library-hero, .music3-setup-hero { align-items: flex-start; flex-direction: column; }.music3-submit-row .music3-generate { width: 100%; }.music3-form-note { justify-content: flex-start; }.music3-audio-row { align-items: stretch; flex-direction: column; }.music3-audio-row audio { width: 100%; }.music3-audio-row a { align-self: flex-end; }.music3-task { grid-template-columns: auto minmax(0, 1fr); }.music3-task > time { grid-column: 2; }.music3-library-count { width: 6rem; height: 6rem; } }
 @media (prefers-reduced-motion: reduce) { .spin { animation: none; } }
+
+/* MiniMax-specific surfaces use the same semantic color roles as the shell. */
+.music3-page { --music3-glow: rgb(var(--accent-rgb) / 0.14); }
+.music3-metric-strip { background: linear-gradient(110deg, var(--panel-raised), var(--panel)); }
+.music3-metric-strip svg, .music3-section-label svg, .music3-submit-row p svg, .music3-form-note svg { color: var(--accent); }
+.music3-model-mark { color: var(--accent); background: rgb(var(--accent-rgb) / 0.1); border-color: rgb(var(--accent-rgb) / 0.3); }
+.music3-quickstarts button { color: var(--info); background: rgb(var(--info-rgb) / 0.09); border-color: rgb(var(--info-rgb) / 0.25); }
+.music3-quickstarts button:hover { border-color: var(--info); }
+.music3-lyrics-field textarea, .music3-advanced { background: var(--panel-sunken); }
+.music3-generate { color: var(--on-accent); background: var(--accent); box-shadow: 0 0.7rem 1.6rem rgb(var(--accent-rgb) / 0.16); }
+.music3-generate kbd { color: var(--on-accent); background: rgb(var(--accent-rgb) / 0.14); }
+.music3-error { background: rgb(var(--danger-rgb) / 0.1); border-color: rgb(var(--danger-rgb) / 0.3); }
+.music3-state.online { color: var(--on-success); background: var(--success-strong); }
+.music3-state.offline { color: var(--on-danger); background: var(--danger-strong); }
+.music3-state.checking { color: var(--info); background: rgb(var(--info-rgb) / 0.12); }
+.music3-service-actions a, .music3-doc-link { color: var(--info); }
+.music3-note { background: linear-gradient(145deg, rgb(var(--accent-rgb) / 0.16), var(--panel) 68%); }
+.music3-note::after { border-color: rgb(var(--accent-rgb) / 0.28); }
+.music3-note > div { color: var(--accent); }
+.music3-queue-heading > div:last-child svg { color: var(--accent); }
+.music3-task.ready { border-color: rgb(var(--success-rgb) / 0.45); }
+.music3-task.failed { border-color: rgb(var(--danger-rgb) / 0.4); }
+.music3-task-icon { color: var(--info); background: rgb(var(--info-rgb) / 0.1); }
+.music3-task.ready .music3-task-icon { color: var(--success); background: rgb(var(--success-rgb) / 0.12); }
+.music3-task.failed .music3-task-icon { color: var(--danger); background: rgb(var(--danger-rgb) / 0.12); }
+.music3-audio-row, .music3-empty > svg, .music3-library-count, .music3-setup-hero > svg { color: var(--accent); }
+.music3-library-hero { background: linear-gradient(120deg, rgb(var(--accent-rgb) / 0.14), var(--panel)); }
+.music3-library-count { background: rgb(var(--accent-rgb) / 0.1); border-color: rgb(var(--accent-rgb) / 0.3); }
+.music3-command code { color: var(--info); }

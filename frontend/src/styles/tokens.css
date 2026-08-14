@@ -1,27 +1,87 @@
 :root {
-  color-scheme: dark;
-  --ink: #f6f3e9;
-  --muted: #aaa79d;
-  --faint: #77766e;
-  --canvas: #12120f;
-  --canvas-deep: #0b0c0a;
-  --panel: #1b1c18;
-  --panel-raised: #23241f;
-  --panel-sunken: #151613;
-  --line: rgba(246, 243, 233, 0.12);
-  --line-bright: rgba(246, 243, 233, 0.22);
-  --lime: #d8ed76;
-  --lime-dim: #73833b;
-  --coral: #ff9c7e;
-  --blue: #8ed4e7;
-  --danger: #ffb3a0;
-  --shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+  color-scheme: dark light;
+  --ink-rgb: 245 247 250;
+  --canvas-deep-rgb: 10 13 17;
+  --accent-rgb: 100 210 255;
+  --info-rgb: 100 210 255;
+  --success-rgb: 48 209 88;
+  --warning-rgb: 255 159 10;
+  --danger-rgb: 255 69 58;
+  --ink: #f5f7fa;
+  --muted: #b6c0cc;
+  --faint: #8b96a3;
+  --canvas: #101418;
+  --canvas-deep: #0a0d11;
+  --panel: #181f26;
+  --panel-raised: #222b34;
+  --panel-sunken: #0e1318;
+  --line: rgb(var(--ink-rgb) / 0.13);
+  --line-bright: rgb(var(--ink-rgb) / 0.25);
+  --accent: #64d2ff;
+  --accent-strong: #64d2ff;
+  --accent-dim: #2e6f8a;
+  --info: #64d2ff;
+  --success: #30d158;
+  --success-strong: #30d158;
+  --warning: #ff9f0a;
+  --warning-strong: #ff9f0a;
+  --danger: #ff6961;
+  --danger-strong: #ff453a;
+  --on-accent: #041521;
+  --on-success: #06210f;
+  --on-warning: #251100;
+  --on-danger: #2b0705;
+  --shadow: 0 20px 48px rgb(0 0 0 / 0.26);
   --font-display: Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, ui-serif, serif;
   --font-ui: Avenir Next, Avenir, Nunito Sans, Segoe UI, ui-sans-serif, sans-serif;
   --radius-xl: 1.5rem;
   --radius-lg: 1rem;
   --radius-md: 0.75rem;
   --radius-sm: 0.5rem;
+
+  /* Legacy aliases keep the older Forge surfaces on the same semantic map. */
+  --lime: var(--accent);
+  --lime-dim: var(--accent-dim);
+  --blue: var(--info);
+  --coral: var(--warning);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --ink-rgb: 28 28 30;
+    --canvas-deep-rgb: 229 229 234;
+    --accent-rgb: 0 122 255;
+    --info-rgb: 0 81 213;
+    --success-rgb: 52 199 89;
+    --warning-rgb: 255 159 10;
+    --danger-rgb: 255 59 48;
+    --ink: #1c1c1e;
+    --muted: #636366;
+    --faint: #6e6e73;
+    --canvas: #f2f2f7;
+    --canvas-deep: #e5e5ea;
+    --panel: #ffffff;
+    --panel-raised: #f2f2f7;
+    --panel-sunken: #f7f7f8;
+    --line: rgb(var(--ink-rgb) / 0.18);
+    --line-bright: rgb(var(--ink-rgb) / 0.32);
+    --accent: #007aff;
+    --accent-strong: #0051d5;
+    --accent-dim: #5ac8fa;
+    --info: #0051d5;
+    --success: #248a3d;
+    --success-strong: #34c759;
+    --warning: #9a5200;
+    --warning-strong: #ff9f0a;
+    --danger: #d70015;
+    --danger-strong: #ff3b30;
+    --on-accent: #041521;
+    --on-success: #06210f;
+    --on-warning: #251100;
+    --on-danger: #2b0705;
+    --shadow: 0 20px 48px rgb(28 28 30 / 0.14);
+  }
 }
 
 html[lang="ja"] {

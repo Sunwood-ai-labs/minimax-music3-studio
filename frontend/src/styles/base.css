@@ -2,7 +2,7 @@
 
 html { min-width: 320px; background: var(--canvas-deep); }
 body { min-width: 320px; min-height: 100vh; margin: 0; color: var(--ink); background: var(--canvas); font-family: var(--font-ui); font-size: 16px; line-height: 1.5; }
-body::selection { color: var(--canvas); background: var(--lime); }
+body::selection { color: var(--on-accent); background: var(--accent); }
 button, input, textarea, select { font: inherit; }
 button, select, input[type="checkbox"] { cursor: pointer; }
 button:disabled { cursor: not-allowed; opacity: 0.52; }
@@ -12,19 +12,19 @@ h1, h2, h3 { text-wrap: balance; }
 code, kbd { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
 
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, summary:focus-visible {
-  outline: 3px solid var(--lime);
+  outline: 3px solid var(--accent);
   outline-offset: 3px;
 }
 
-.skip-link { position: fixed; z-index: 20; top: 0.75rem; left: 0.75rem; padding: 0.6rem 0.8rem; color: var(--canvas); background: var(--lime); border-radius: var(--radius-sm); transform: translateY(-180%); transition: transform 160ms ease; }
+.skip-link { position: fixed; z-index: 20; top: 0.75rem; left: 0.75rem; padding: 0.6rem 0.8rem; color: var(--on-accent); background: var(--accent); border-radius: var(--radius-sm); transform: translateY(-180%); transition: transform 160ms ease; }
 .skip-link:focus { transform: translateY(0); }
 .eyebrow { color: var(--lime); font-size: 0.69rem; font-weight: 760; letter-spacing: 0.13em; text-transform: uppercase; }
 .quiet-label { color: var(--faint); font-size: 0.78rem; }
 
 .primary-button, .secondary-button, .text-button, .icon-button { display: inline-flex; align-items: center; justify-content: center; gap: 0.48rem; min-height: 2.75rem; border: 0; border-radius: var(--radius-md); transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease; }
 .primary-button:hover:not(:disabled), .secondary-button:hover, .icon-button:hover { transform: translateY(-1px); }
-.primary-button { padding: 0.7rem 0.8rem 0.7rem 1rem; color: #1c210c; background: var(--lime); font-weight: 760; }
-.primary-button kbd { margin-left: 0.3rem; padding: 0.12rem 0.32rem; color: rgba(28, 33, 12, 0.72); background: rgba(28, 33, 12, 0.12); border-radius: 0.25rem; font-size: 0.67rem; }
+.primary-button { padding: 0.7rem 0.8rem 0.7rem 1rem; color: var(--on-accent); background: var(--accent); font-weight: 760; }
+.primary-button kbd { margin-left: 0.3rem; padding: 0.12rem 0.32rem; color: var(--on-accent); background: rgb(var(--accent-rgb) / 0.14); border-radius: 0.25rem; font-size: 0.67rem; }
 .secondary-button { padding: 0.62rem 0.8rem; color: var(--ink); background: transparent; border: 1px solid var(--line-bright); font-size: 0.86rem; font-weight: 700; }
 .text-button { padding: 0.4rem; color: var(--muted); background: transparent; font-size: 0.84rem; }
 .icon-button { width: 2.75rem; padding: 0; color: var(--ink); background: var(--panel-raised); border: 1px solid var(--line); }
@@ -33,10 +33,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visib
 input, textarea, select { width: 100%; color: var(--ink); background: var(--panel-sunken); border: 1px solid var(--line); border-radius: var(--radius-sm); }
 input, select { min-height: 2.7rem; padding: 0.55rem 0.7rem; }
 textarea { min-height: 4.5rem; padding: 0.7rem; resize: vertical; }
-input::placeholder, textarea::placeholder { color: #85847b; }
+input::placeholder, textarea::placeholder { color: var(--faint); }
 input:hover, textarea:hover, select:hover { border-color: var(--line-bright); }
-input:focus, textarea:focus, select:focus { border-color: var(--lime); outline: none; }
-input[type="checkbox"] { width: 1.05rem; height: 1.05rem; min-height: auto; accent-color: var(--lime); }
+input:focus, textarea:focus, select:focus { border-color: var(--accent); outline: none; }
+input[type="checkbox"] { width: 1.05rem; height: 1.05rem; min-height: auto; accent-color: var(--accent); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }

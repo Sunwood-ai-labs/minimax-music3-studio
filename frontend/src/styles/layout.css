@@ -38,3 +38,16 @@
 }
 
 @media (max-width: 480px) { .topbar { align-items: flex-end; padding: 1.1rem; }.topbar-actions { align-self: flex-start; }.language-switcher-label { display: none; }.language-switcher { gap: 0.1rem; }.main-content { padding: 1rem; }.topbar h1 { font-size: 2rem; } }
+
+/* Keep the shell on the semantic palette in every appearance. */
+.app-frame { background: radial-gradient(circle at 90% 0%, rgb(var(--accent-rgb) / 0.08), transparent 28rem), var(--canvas); }
+.sidebar { background: rgb(var(--canvas-deep-rgb) / 0.82); }
+.nav-link:hover { background: rgb(var(--ink-rgb) / 0.06); }
+.footer-brand-icon { background: var(--canvas-deep); border-color: rgb(var(--ink-rgb) / 0.14); box-shadow: 0 0 0 1px rgb(var(--accent-rgb) / 0.08); }
+.service-badge.online { color: var(--success); }.service-badge.online span { background: var(--success); }
+.service-badge.offline { color: var(--danger); }.service-badge.offline span { background: var(--danger); }
+.topbar-status svg { color: var(--accent); }
+.language-switcher button:hover { background: rgb(var(--ink-rgb) / 0.08); }
+.language-switcher button.is-selected { color: var(--on-accent); background: var(--accent); }
+
+@media (max-width: 800px) { .sidebar { background: rgb(var(--canvas-deep-rgb) / 0.96); } }
