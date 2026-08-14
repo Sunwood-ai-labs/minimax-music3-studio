@@ -85,6 +85,16 @@ npm run dev
 
 ブラウザで <http://127.0.0.1:5173> を開きます。
 
+ComfyUIをWindowsホストに残したまま、UIとgatewayだけをコンテナで起動する
+場合は次を使えます。
+
+```powershell
+docker compose -f docker-compose.music3.yml up -d --build
+```
+
+ブラウザで <http://127.0.0.1:5173> を開きます。Compose版gatewayは
+`host.docker.internal:8201` 経由でホスト上のComfyUIへ接続します。
+
 ## 生成の流れ
 
 ```text
@@ -108,7 +118,7 @@ DAV VAE、KSampler、`SaveAudioMP3` で構成しています。Tiled decode をO
 ## 変更を確認する
 
 ```powershell
-docker compose config --quiet
+docker compose -f docker-compose.music3.yml config --quiet
 Set-Location frontend
 npm run typecheck
 npm test

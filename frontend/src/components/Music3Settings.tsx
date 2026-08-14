@@ -22,7 +22,7 @@ export function Music3Settings({ draft, onUpdate }: Music3SettingsProps) {
           <label><span>CFG scale</span><input type="number" min="0.1" max="4" step="0.1" value={draft.cfgScale} onChange={(event) => onUpdate("cfgScale", event.target.value)} /></label>
           <label className="music3-check"><input type="checkbox" checked={draft.tiledDecode} onChange={(event) => onUpdate("tiledDecode", event.target.checked)} /><span><strong><Layers3 size={14} aria-hidden="true" /> Tiled decode</strong><small>VRAM-friendly on a 4090</small></span></label>
         </div>
-        <label className="music3-seed"><span><Dice5 size={14} aria-hidden="true" /> Seed</span><div><input disabled={draft.useRandomSeed} value={draft.useRandomSeed ? "Random per take" : draft.seed} onChange={(event) => onUpdate("seed", event.target.value)} /><label className="music3-check compact"><input type="checkbox" checked={draft.useRandomSeed} onChange={(event) => onUpdate("useRandomSeed", event.target.checked)} /><span>Random</span></label></div></label>
+        <label className="music3-seed"><span><Dice5 size={14} aria-hidden="true" /> Seed</span><div><input disabled={draft.useRandomSeed} value={draft.useRandomSeed ? "Random per take" : draft.seed} onChange={(event) => onUpdate("seed", event.target.value)} /><div className="music3-check compact"><input aria-label="Random" type="checkbox" checked={draft.useRandomSeed} onChange={(event) => onUpdate("useRandomSeed", event.target.checked)} /><span>Random</span></div></div></label>
       </details>
     </section>
   );

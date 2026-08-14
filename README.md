@@ -97,6 +97,15 @@ $env:VITE_API_TARGET = "http://127.0.0.1:8202"
 npm run dev
 ```
 
+For a containerized UI plus gateway while ComfyUI stays on the Windows host:
+
+```powershell
+docker compose -f docker-compose.music3.yml up -d --build
+```
+
+Open <http://127.0.0.1:5173>. The Compose gateway reaches the host worker via
+`host.docker.internal:8201`.
+
 ## How a generation moves
 
 ```text
@@ -120,7 +129,7 @@ the regular `VAEDecodeAudio` node.
 ## Verify a change
 
 ```powershell
-docker compose config --quiet
+docker compose -f docker-compose.music3.yml config --quiet
 Set-Location frontend
 npm run typecheck
 npm test
