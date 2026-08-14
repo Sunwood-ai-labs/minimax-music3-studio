@@ -1,4 +1,4 @@
-name: Build and deploy Forge full stack to M1
+name: Build and deploy MiniMax Music 3.0 Studio to M1
 
 on:
   push:
@@ -17,7 +17,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/sunwood-ai-labs/ace-step-forge-ui
+  IMAGE_NAME: ghcr.io/sunwood-ai-labs/minimax-music3-studio-ui
 
 permissions:
   contents: read
@@ -44,7 +44,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and publish UI
+      - name: Build and publish MiniMax Studio UI
         uses: docker/build-push-action@v6
         with:
           context: ./frontend
