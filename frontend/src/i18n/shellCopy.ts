@@ -8,24 +8,22 @@ export function getShellCopy(locale: Locale) {
       navigationLabel: "主なナビゲーション",
       workspace: "ワークスペース",
       navigation: {
-        create: { label: "作成", hint: "新しい曲を生成する" },
-        library: { label: "ライブラリ", hint: "完成した曲を聴く" },
-        mcp: { label: "MCP", hint: "Claude Code や Codex を接続する" },
-        system: { label: "システム", hint: "接続と API を設定する" },
+        create: { label: "作成", hint: "MiniMax Music 3.0で曲を生成する" },
+        library: { label: "ライブラリ", hint: "生成した曲を聴く" },
+        system: { label: "セットアップ", hint: "ComfyUIとゲートウェイを確認する" },
       },
       pageMeta(pathname: string) {
-        if (pathname === "/library") return ["共有コレクション", "ライブラリ"] as const;
-        if (pathname === "/mcp") return ["エージェント音楽ブリッジ", "MCP"] as const;
-        if (pathname === "/system") return ["接続コントロール", "システム"] as const;
-        return ["新しいトラック", "作成"] as const;
+        if (pathname === "/library") return ["ローカルコレクション", "ライブラリ"] as const;
+        if (pathname === "/system") return ["ローカルランタイム", "セットアップ"] as const;
+        return ["MiniMax Music 3.0", "作曲"] as const;
       },
       serviceLabel(state: ServiceState) {
-        if (state === "online") return "API 接続済み";
-        if (state === "checking") return "API を確認中";
-        return "API に接続できません";
+        if (state === "online") return "Gateway 接続済み";
+        if (state === "checking") return "Gateway を確認中";
+        return "Gateway に接続できません";
       },
-      localServiceNote: "すべてのジョブはローカルの ACE-Step サービスでレンダリングされます。",
-      sourceApi: "ソースと API",
+      localServiceNote: "ComfyUI上のMiniMax Music 3.0でローカル生成します。",
+      sourceApi: "GitHub リポジトリ",
       languageLabel: "表示言語",
       switchToEnglish: "English に切り替える",
       switchToJapanese: "日本語に切り替える",
@@ -40,24 +38,22 @@ export function getShellCopy(locale: Locale) {
     navigationLabel: "Primary navigation",
     workspace: "Workspace",
     navigation: {
-      create: { label: "Create", hint: "Compose a new generation" },
-      library: { label: "Library", hint: "Listen to finished work" },
-      mcp: { label: "MCP", hint: "Connect Claude Code or Codex" },
-      system: { label: "System", hint: "Connection and API access" },
+      create: { label: "Create", hint: "Generate with MiniMax Music 3.0" },
+      library: { label: "Library", hint: "Audition finished takes" },
+      system: { label: "Setup", hint: "Check ComfyUI and the gateway" },
     },
     pageMeta(pathname: string) {
-      if (pathname === "/library") return ["Shared collection", "Library"] as const;
-      if (pathname === "/mcp") return ["Agent music bridge", "MCP"] as const;
-      if (pathname === "/system") return ["Connection control", "System"] as const;
-      return ["A quieter way to start a track", "Create"] as const;
+      if (pathname === "/library") return ["Local collection", "Library"] as const;
+      if (pathname === "/system") return ["Local runtime", "Setup"] as const;
+      return ["MiniMax Music 3.0", "Compose"] as const;
     },
     serviceLabel(state: ServiceState) {
-      if (state === "online") return "API ready";
-      if (state === "checking") return "Checking API";
-      return "API unavailable";
+      if (state === "online") return "Gateway ready";
+      if (state === "checking") return "Checking gateway";
+      return "Gateway unavailable";
     },
-    localServiceNote: "All jobs are rendered by your local ACE-Step service.",
-    sourceApi: "Source & API",
+    localServiceNote: "All jobs are rendered locally by MiniMax Music 3.0 on ComfyUI.",
+    sourceApi: "GitHub repository",
     languageLabel: "Language",
     switchToEnglish: "Switch to English",
     switchToJapanese: "Switch to Japanese",

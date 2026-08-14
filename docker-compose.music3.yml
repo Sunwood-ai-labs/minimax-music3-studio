@@ -1,0 +1,31 @@
+# MiniMax Music 3.0 Studio UI + local gateway.
+# ComfyUI remains the GPU worker on the host at host.docker.internal:8201.
+services:
+  music3-gateway:
+    image: python:3.12-slim
+    container_name: minimax-music3-gateway
+    working_dir: /app
+    command: ["python", "tools/music3_gateway.py", "--host", "0.0.0.0", "--port", "8202"]
+    environment:
+      MUSIC3_COMFY_URL: ${MUSIC3_COMFY_URL:-http://host.docker.internal:8201}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/app
+    ports:
+      - "127.0.0.1:${MUSIC3_GATEWAY_PORT:-8202}:8202"
+    restart: unless-stopped
+
+  music3-studio:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: minimax-music3-studio:local
+    container_name: minimax-music3-studio
+    depends_on:
+      - music3-gateway
+    environment:
+      FORGE_API_UPSTREAM: music3-gateway:8202
+    ports:
+      - "${MUSIC3_STUDIO_PORT:-5173}:8080"
+    restart: unless-stopped

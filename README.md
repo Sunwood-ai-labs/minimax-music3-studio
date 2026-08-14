@@ -1,179 +1,164 @@
-<p align="center">
-  <img src="./docs/public/images/ace-step-forge-header.png" width="100%" alt="ACE-STEP FORGE — local-first AI music workspace">
-</p>
+# MiniMax Music 3.0 Studio
 
-<h1 align="center">ACE-Step Forge</h1>
+Local-first music generation workspace for MiniMax Music 3.0 on ComfyUI.
 
-<p align="center">
-  A local-first music workspace and Streamable HTTP MCP gateway for <a href="https://github.com/ace-step/ACE-Step-1.5">ACE-Step 1.5</a>.
-</p>
+MiniMax Music 3.0 Studio turns a structured brief and section-tagged lyrics into
+a real ComfyUI queue job. It keeps the GPU render local, shows progress in a
+small Library, and lets you audition or download the resulting MP3 from the
+browser.
 
-<p align="center">
-  <a href="./README.ja.md">日本語</a> ·
-  <a href="https://sunwood-ai-labs.github.io/ace-step-forge/">Documentation</a> ·
-  <a href="https://github.com/Sunwood-ai-labs/ace-step-forge/issues">Issues</a> ·
-  <a href="./LICENSE">MIT License</a>
-</p>
+> This is an unofficial community project. It is not affiliated with or
+> endorsed by MiniMax, ComfyUI, or the ACE-Step team.
 
-> **Fork relationship.** Forge is an independently maintained MIT fork of
-> [ace-step/ACE-Step-1.5](https://github.com/ace-step/ACE-Step-1.5). It keeps
-> the upstream ACE-Step engine, API, and Gradio UI, and adds a focused React
-> workspace, a shared server-side Library, Docker Compose operations, and an
-> MCP bridge for coding agents. It is not affiliated with ACEMusic or the
-> upstream ACE-Step team.
+[日本語](./README.ja.md) · [MiniMax workflow](./workflows/minimax_music3_api.json) · [Issues](https://github.com/Sunwood-ai-labs/minimax-music3-studio/issues) · [MIT License](./LICENSE)
 
-## ✨ The Forge workflow
+## Why this exists
 
-![ACE-Step Forge Library with a generated Japanese rock instrumental playing](./docs/public/images/forge-library-playback.png)
-
-<sub>Captured from the running local Forge app after starting playback from the shared Library.</sub>
-
-Forge makes the normal creative loop explicit:
+The generation UI is the product surface. The important input is not a single
+genre prompt, but a small production brief:
 
 ```text
-Create in Forge ──► ACE-Step generation queue ──► shared Library ──► play / download / visualizer MP4
-Claude Code or Codex ───────────────────────────► same queue ─────► same Library
+Global Metadata: genre, tempo, key, emotional arc
+Vocal Details: language, timbre, performance
+Arrangement: instruments, song shape, mix direction
 ```
 
-- **Create** — write a prompt, select the generation controls, and submit to
-  the existing ACE-Step API.
-- **Library** — completed audio is copied to `gradio_outputs/forge-library`,
-  so it is shared by the Forge service rather than remembered only by one
-  browser.
-- **Visualizer** — choose a 16:9 or social-first 9:16 frame for a finished
-  take and Forge renders a local H.264/AAC MP4 with a title card, generation
-  details, and an audio-reactive waveform. It stays alongside the shared
-  Library assets; no audio is uploaded to an external video service.
-- **MCP** — Claude Code, Codex CLI, and compatible clients can call the same
-  queue through a local Streamable HTTP endpoint.
-- **Legacy Gradio** — the official upstream Gradio UI remains available through
-  the opt-in `legacy` Compose profile.
+The Studio assembles those three fields into the caption format used by the
+MiniMax Music 3.0 ComfyUI node, while passing lyrics with tags such as
+`[Intro]`, `[Verse]`, `[Chorus]`, `[Bridge]`, and `[Outro]` unchanged.
 
-## ⚡ Start Forge with Docker Compose
+## Included
 
-### Prerequisites
+- **Compose** — structured MiniMax Music 3.0 brief, Japanese vocal defaults,
+  lyrics editor, quick starts, duration, steps, CFG, seed, variations, and
+  tiled VAE decode.
+- **Local gateway** — a dependency-light Python bridge that queues the checked-
+  in API workflow at ComfyUI and maps history into stable Studio task states.
+- **Library** — durable local metadata, MP3 preview, and download. Audio and
+  generated outputs stay outside Git.
+- **Setup** — visible runtime status and copyable Windows start commands.
+- **Responsive UI** — a dark sound-workstation interface designed for desktop
+  and narrow screens.
 
-- Docker Desktop (Linux containers) with NVIDIA GPU support, or Docker Engine
-  plus the NVIDIA Container Toolkit.
-- An NVIDIA driver and an ACE-Step-compatible GPU. The model checkpoints are
-  downloaded or loaded on the first generation.
+The post-generation lyric/SRT and HyperFrames motion workflow can consume the
+MP3 from the Library. This repository keeps generation as the primary flow;
+those video steps are intentionally separate tools.
+
+## Requirements
+
+- Windows with Python 3.11+ and Node.js 20+
+- ComfyUI with the MiniMax Music 3.0 nodes available
+- NVIDIA GPU with enough VRAM for the selected duration; the local workflow was
+  exercised with an RTX 4090 profile and INT8 checkpoints
+- These model files in ComfyUI's model folders:
+  - `diffusion_models/minimax_music3_dit_int8_convrot.safetensors`
+  - `text_encoders/minimax_music3_text_encoder_pruned_int8_convrot.safetensors`
+  - `vae/minimax_music3_dav.safetensors`
+
+Model weights are intentionally not included in this repository.
+
+## Quick start
+
+### 1. Start ComfyUI
+
+Start ComfyUI with its API listening on `127.0.0.1:8201`. If your worker uses
+another port, set `MUSIC3_COMFY_URL` before starting the gateway.
+
+### 2. Start the local gateway
+
+From the repository root:
 
 ```powershell
-git clone https://github.com/Sunwood-ai-labs/ace-step-forge.git
-Set-Location ace-step-forge
-Copy-Item .env.example .env
-
-# Prefer a stable GPU UUID over a numeric index.
-nvidia-smi -L
-# Edit .env and set, for example:
-# ACESTEP_GPU_DEVICE_ID=GPU-<your-GPU-uuid>
-
-docker compose up -d --build
-docker compose ps
+python tools/music3_gateway.py
 ```
 
-Open the workspace at <http://localhost:3000>. The local services are:
-
-| Service | Local address | Purpose |
-| --- | --- | --- |
-| Forge workspace | <http://localhost:3000> | Create, Library, MCP instructions, and System status |
-| ACE-Step REST API | <http://localhost:8001> | Scripts and integrations |
-| MCP gateway | <http://127.0.0.1:8002/mcp> | Local coding-agent connection |
-| Upstream Gradio UI | <http://localhost:7860> | `docker compose --profile legacy up acestep-gradio` |
-
-If port `3000` is in use, set `FORGE_PORT=3002` in `.env` and open that port
-instead. The browser still talks only to Forge's same-origin `/api` proxy.
-
-### Apple Silicon M1 all-in-one runtime
-
-The [`deploy/m1/`](./deploy/m1/) manifest and
-[GitHub Actions workflow](./.github/workflows/deploy-m1.yml) deploy the full
-ARM64 stack on the Mac: UI container, native MPS/MLX API, native MCP, and the
-shared Library. It does not depend on the NVIDIA workstation.
-
-### A practical 12 GB GPU profile
-
-Compose intentionally exposes only the GPU named by `ACESTEP_GPU_DEVICE_ID` to
-the API and the optional Gradio container. Use the UUID reported by
-`nvidia-smi -L`; Docker Desktop can enumerate numeric GPU indices differently
-from the host.
-
-For a 12 GB card such as an RTX 3060, this core-generation profile avoids
-loading the 5 Hz language-model planner at startup:
-
-```dotenv
-ACESTEP_GPU_DEVICE_ID=GPU-<your-GPU-uuid>
-ACESTEP_INIT_LLM=false
-```
-
-`ACESTEP_INIT_LLM=false` does **not** reserve or free another GPU. It disables
-the optional 5 Hz planner / LLM-enhanced input features on the selected GPU,
-leaving the core ACE-Step generation path available with lower VRAM pressure.
-Set it back to `auto` or `true` when you deliberately want planner features and
-have the VRAM budget. See the [12 GB GPU guide](./docs/en/GPU_12GB.md) for
-verification commands and trade-offs.
-
-## 🔌 Use from Claude Code or Codex
-
-Bring up the stack, then register its local-only Streamable HTTP endpoint:
+The gateway listens on `http://127.0.0.1:8202` and only translates requests;
+ComfyUI remains the GPU worker. For a different address:
 
 ```powershell
-# Claude Code
-claude mcp add --transport http ace-step-forge http://127.0.0.1:8002/mcp
-
-# Codex CLI
-codex mcp add ace-step-forge --url http://127.0.0.1:8002/mcp
+$env:MUSIC3_COMFY_URL = "http://127.0.0.1:8201"
+$env:MUSIC3_GATEWAY_PORT = "8202"
+python tools/music3_gateway.py
 ```
 
-The gateway exposes five focused tools:
-
-`generate_music`, `get_generation_status`, `wait_for_generation`,
-`list_music_library`, and `get_music_server_status`.
-
-It binds to `127.0.0.1` by default. To require authentication, set
-`ACESTEP_MCP_API_KEY` in `.env` and pass the same value to the client through
-an environment variable. For a Tailnet deployment, use Tailscale Serve/ACLs
-and set the explicit allowed host and public API base URL described in the
-[MCP guide](./docs/en/MCP.md). A Tailnet URL is private to that Tailnet, not a
-public Internet endpoint.
-
-## 📚 Documentation
-
-- [Forge workspace overview](./docs/en/FORGE.md) — routes, storage, and the API boundary
-- [MCP setup](./docs/en/MCP.md) — Claude Code, Codex, auth, and Tailnet notes
-- [12 GB GPU operation](./docs/en/GPU_12GB.md) — stable UUID selection and the planner decision
-- [M1 CI/CD deployment](./deploy/m1/README.md) — all-in-one ARM64 UI, API, MCP, and Library
-- [React UI design and QA contract](./docs/en/REACT_FORGE.md)
-- [Official ACE-Step installation and model guides](./docs/en/INSTALL.md)
-- [日本語ドキュメント](./docs/ja/FORGE.md)
-
-The GitHub Pages documentation site is published from `docs/` on pushes to
-`main`.
-
-## 🧪 Verify a local change
+### 3. Start the Studio UI
 
 ```powershell
-docker compose config --quiet
 Set-Location frontend
 npm ci
-npm run test
-npm run build
+npm run dev
 ```
 
-For a user-visible release, also create a short track, wait until it reaches
-**Ready**, open **Library**, and start the browser audio player. The Library
-view is the end-to-end proof that generation and retained playback work
-together.
+Open <http://127.0.0.1:5173>. If the gateway is not on port `8202`, use
+`VITE_API_TARGET` when starting Vite:
 
-## 🤝 Contributing and license
+```powershell
+$env:VITE_API_TARGET = "http://127.0.0.1:8202"
+npm run dev
+```
 
-Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a change. Forge
-is released under the [MIT License](./LICENSE). Upstream ACE-Step code and model
-documentation remain credited to the ACE-Step team; see the original
-[ACE-Step 1.5 repository](https://github.com/ace-step/ACE-Step-1.5) for its
-research, model, and ecosystem materials.
+For a containerized UI plus gateway while ComfyUI stays on the Windows host:
 
-<p align="center">
-  <img src="./docs/public/logo.png" width="52" alt="ACE-Step Forge icon"><br>
-  <sub>ACE-Step Forge icon</sub>
-</p>
+```powershell
+docker compose -f docker-compose.music3.yml up -d --build
+```
+
+Open <http://127.0.0.1:5173>. The Compose gateway reaches the host worker via
+`host.docker.internal:8201`.
+
+## How a generation moves
+
+```text
+Compose form
+    │ structured caption + tagged lyrics
+    ▼
+MiniMax Music 3.0 gateway :8202
+    │ POST /prompt
+    ▼
+ComfyUI :8201 ── GPU render ──► SaveAudioMP3
+    │ history polling
+    ▼
+Library metadata + /audio/<prompt-id>
+```
+
+The checked-in workflow uses the INT8 DiT, MiniMax text encoder, MiniMax DAV
+VAE, KSampler, and `SaveAudioMP3`. Tiled decode switches node 12 to
+`VAEDecodeAudioTiled` with a 512/64 tile-overlap profile; turning it off uses
+the regular `VAEDecodeAudio` node.
+
+## Verify a change
+
+```powershell
+docker compose -f docker-compose.music3.yml config --quiet
+Set-Location frontend
+npm run typecheck
+npm test
+npm run build
+Set-Location ..
+python -m unittest tools.test_music3_gateway
+```
+
+The end-to-end smoke path is: open Compose, choose a Quick start, set a short
+duration, generate, wait for **Ready to audition**, then play the MP3 in the
+queue or Library. A local smoke render was verified with an 8-second Japanese
+vocal request, 8 steps, tiled decode, and a browser playback duration of about
+8 seconds.
+
+## Repository boundaries
+
+- Do not commit model weights, private `.env` files, audio, SRT, or rendered
+  video. Runtime metadata is written to the ignored `data/` directory.
+- The React shell in this repository started from
+  [ACE-Step Forge](https://github.com/Sunwood-ai-labs/ace-step-forge), whose
+  upstream code and MIT attribution remain in the tree. MiniMax-specific
+  generation is implemented by the gateway and Studio UI in this repository.
+- The public project name is `minimax-music3-studio`; the display name is
+  **MiniMax Music 3.0 Studio**.
+
+## References
+
+- [MiniMax AI on GitHub](https://github.com/MiniMax-AI)
+- [MiniMax Music 3.0 model files for ComfyUI](https://huggingface.co/Comfy-Org/MiniMax-Music-3)
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [ACE-Step Forge baseline](https://github.com/Sunwood-ai-labs/ace-step-forge)
+- [ACE-Step 1.5 upstream](https://github.com/ace-step/ACE-Step-1.5)
